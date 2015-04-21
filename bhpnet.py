@@ -4,7 +4,7 @@ import getopt
 import threading
 import subprocess
 
-# global vars
+# declare and initialize global vars
 listen = False
 command = False
 upload = False
