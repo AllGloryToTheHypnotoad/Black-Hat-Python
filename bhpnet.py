@@ -1,3 +1,5 @@
+#!/usr/bin/python2.7
+
 import sys
 import socket
 import getopt
@@ -32,7 +34,6 @@ def usage ():
 
 def client_sender(buffer):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print "client object built"
 
     try:
         # connect to our target host
@@ -40,7 +41,6 @@ def client_sender(buffer):
         
         if len(buffer):
             client.send(buffer)
-            print "sent!"
             
         while True:
             # now wait for data back
@@ -48,7 +48,7 @@ def client_sender(buffer):
             response = ""
             
             while recv_len:
-                data = client.recv(1024)          
+                data = client.recv(4096)          
                 recv_len = len(data)
                 response += data
             
@@ -143,7 +143,7 @@ def client_handler(client_socket):
         
     # now we go into another loop if a command shell was requested
     
-    if command :
+    if command:
         while True:
             # show a simple prompt
             client_socket.send("<BHP:#> ")
