@@ -69,9 +69,10 @@ def client_sender(buffer):
         # tear down the connection
         client.close()
         
-        
+
 def server_loop():
     global target
+    global port
     
     # if no target is defined, we listen on all interfaces
     if not len(target):
@@ -87,7 +88,7 @@ def server_loop():
         # spin off a new thread to handle the client
         client_thread = threading.Thread(target=client_handler, args=(client_socket,))
         client_thread.start()
-        
+
 def run_command(command):
     # trim the newline
     command = command.rstrip()
@@ -203,7 +204,6 @@ def main():
         # this will block, so send CTRL-D if not sending input
         # to stdin
             
-        print "reading from command line"
         buffer = sys.stdin.read()
             
         print "sending data"
